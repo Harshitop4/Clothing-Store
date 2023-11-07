@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-4" style="display: flex;justify-content: center;align-items: center;">
+    <h1 style="position: relative;right: 20vw;">Cart ({{obj|length}})</h1>
+    <button style="position: relative;left: 25vw;" class="btn btn-warning btn-lg" onclick="location.href='/checkout/'">Proceed To Checkout</button>
+</div>
+<div class="container my-1" style="height: 100%;border: 2px solid black;display: flex;align-items: center;justify-content: center;flex-direction: column;">
+    {% for p in obj reversed %}
+    <div style="width: 100%;display: flex;justify-content: center;align-items: center;margin-top: 1vw;">
+        <div style="width: 18rem;margin-left: 8vw;">
+            <img src="{{p.product.image.url}}" class="card-img-top" alt="...">
+        </div>
+        <div class="col" style="margin-left: 10vw;">
+            <div class="">
+                <h2>{{p.product.name}}</h2>
+            </div>
+            <div class="">
+                <h3>Product Description</h3>
+            </div>
+            <div class="">
+                <p>{{p.product.description}}</p>
+            </div>
+            <div class="">
+                <p>Category: {{p.product.category}}</p>
+            </div>
+            <div class="">
+                <p>Quantity: {{p.quantity}}</p>
+            </div>
+        </div>
+        <div class="mx-5">
+            <h4>₹ {{p.product.price}}</h4>
+        </div>
+        <div>
+            <button class="btn btn-danger mx-4" onclick="location.href='/cart/remove/{{p.cart_id}}'">Remove</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

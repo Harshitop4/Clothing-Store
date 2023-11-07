@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Profile Section</h1>
+    <div>
+        <h4>Username: {{user.username}}</h4>
+        <h4>First Name: {{user.first_name}}</h4>
+        <h4>Last Name: {{user.last_name}}</h4>
+        <h4>Email: {{user.email}}</h4>
+    </div>
+    <h3>My Orders:</h3>
+    <div class="container my-1" style="height: 100%;border: 2px solid black;display: flex;align-items: center;justify-content: center;flex-direction: column;">
+        {% for lt,order in my_zip reversed%}
+        <div class="my-3" style="border: 2px solid rgb(161, 152, 152);">
+            {% for p in lt reversed %}
+            <div style="width: 100%;display: flex;justify-content: center;align-items: center;margin-top: 1vw;">
+                <div style="width: 18rem;margin-left: 8vw;">
+                    <img src="{{p.product.image.url}}" class="card-img-top" alt="...">
+                </div>
+                <div class="col" style="margin-left: 10vw;">
+                    <div class="">
+                        <h2>{{p.product.name}}</h2>
+                    </div>
+                    <div class="">
+                        <h3>Product Description</h3>
+                    </div>
+                    <div class="">
+                        <p>{{p.product.description}}</p>
+                    </div>
+                    <div class="">
+                        <p>Category: {{p.product.category}}</p>
+                    </div>
+                    <div class="">
+                        <p>Quantity: {{p.quantity}}</p>
+                    </div>
+                </div>
+                <div class="mx-5">
+                    <h4>₹ {{p.product.price}}</h4>
+                </div>
+            </div>
+            {% endfor %}
+        <div>
+            <h3>Total Amount: {{order.total_amount}}</h3>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

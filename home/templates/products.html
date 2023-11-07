@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+{% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        <p>{{message}}</p>
+    </div>
+{% endfor %}
+<div class="row text-center" style="--bs-columns: 10;height:100vh">
+    <div class="col-2" style='border: 2px solid black;background-color: aliceblue;position: sticky;'>
+        <div class="p-2" style="position: sticky;">
+            <p class="display-6">filters</p>
+            <form method="POST">
+              {% csrf_token %}
+              <hr>
+              <p>Categories</p>
+              {% for category in categories %}
+              <div class="form-check m-2">
+                <input class="form-check-input" style="margin-left: 1vw;" type="checkbox" name="{{ category.name }}" id="{{ category.name }}">
+                <label class="form-check-label" style="margin-right: 5vw;" for="{{ category.name }}">
+                  {{ category }}
+                </label>
+              </div>
+              {% endfor %}
+              <hr>
+              <button type="submit" class="btn btn-dark">filter</button>
+        
+            </form>
+        
+        </div>
+        
+    </div>
+    <div class='col-10' style='border: 2px solid black;background-color: rgb(246, 238, 225);'>
+        <div class="container my-4">
+            <div class="row row-cols-3">
+                {% for p in p_list %}
+                    <div class="card col mx-3 my-3 hover-border" style="width: 18rem;">
+                        <img src="{{p.image.url}}" class="card-img-top" style="max-height: 20rem;" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">{{p.name}}</h5>
+                        <p class="card-text">{{p.description}}</p>
+                        <h5 class="card-title">{{p.price}}</h5>
+                        <a href="{{p.product_id}}" class="btn btn-primary btn-lg">Buy Now</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var alertElements = document.querySelectorAll('.alert');
+    alertElements.forEach(function(alertElement, index) {
+        setTimeout(function() {
+            alertElement.style.display = 'none';
+        }, (index + 1) * 2000);
+    });
+</script>
+{% endblock content %}

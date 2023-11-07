@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container" style="display: flex;align-items: center;justify-content: center;">
+    <div class="container my-5 mx-2" style="border: 2px solid rgb(161, 152, 152);border-radius: 10px;">
+        <div style="display: flex;align-items:center;justify-content:center;" class="my-3">
+            <h1>Checkout Form!!</h1>
+        </div>  
+        <form method='POST'>
+            {% csrf_token %}
+            <div class="mb-3">
+            <label for="exampleInputfN" class="form-label">First Name</label>
+            <input name='first_name' type="name" class="form-control" id="exampleInputfN" aria-describedby="emailHelp" required>
+            </div>
+            <div class="mb-3">
+            <label for="exampleInputlN" class="form-label">Last Name</label>
+            <input name='last_name' type="name" class="form-control" id="exampleInputlN" aria-describedby="emailHelp" required>
+            </div>
+            <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input name='email' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+            </div>
+            <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Phone Number</label>
+            <input name='phone' type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+            </div>
+            <div class="mb-3">
+            <label for="exampleInputsa" class="form-label">Shipping address</label>
+            <input name='address' type="text" class="form-control" id="exampleInputsa" aria-describedby="emailHelp" required>
+            </div>
+            <div style="display: flex;justify-content: center;align-items: center;">
+                <button type="submit" class="btn btn-success my-3">Place Order</button>
+            </div>
+    </form>
+    </div>
+    <div class="container my-5 mx-2" style="border: 2px solid rgb(161, 152, 152);border-radius: 10px;">
+        {% for p in obj reversed %}
+            <div style="width: 100%;display: flex;justify-content: center;align-items: center;margin-top: 1vw;border-bottom: 2px solid rgb(161, 152, 152);">
+                <div class="col" style="margin-left: 0vw;">
+                    <div class="">
+                        <h2>{{p.product.name}}</h2>
+                    </div>
+                    <div class="">
+                        <p>Category: {{p.product.category}}</p>
+                    </div>
+                </div>
+                <div class="mx-5">
+                    <h4 class="fs-6">quantity: {{p.quantity}}</h4>
+                </div>
+                <div class="mx-5">
+                    <h4>₹ {{p.product.price}}</h4>
+                </div>
+            </div>
+        {% endfor %}
+        <div style="width: 100%;display: flex;justify-content: center;align-items: center;margin-top: 1vw;border-bottom: 2px solid rgb(161, 152, 152);">
+            <div class="col" style="margin-left: 0vw;">
+                <div class="">
+                    <h2>Total Amount: </h2>
+                </div>
+            </div>
+            <div class="mx-5">
+                <h4>₹ {{sum}}</h4>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

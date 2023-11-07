@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-5" style="height: 50vh;border: 2px solid black;display: flex;align-items: center;justify-content: center;flex-direction: row;">
+    {% for p in obj %}
+        <div style="width: 18rem;margin-left: 8vw;">
+            <img src="{{p.image.url}}" class="card-img-top" alt="...">
+        </div>
+        <div class="col" style="margin-left: 20vw;">
+            <div class="">
+                <h2>{{p.name}}</h2>
+            </div>
+            <div class="">
+                <h4>₹ {{p.price}}</h4>
+            </div>
+            <div class="">
+                <h3>Product Description</h3>
+            </div>
+            <div class="">
+                <p>{{p.description}}</p>
+            </div>
+            <div class="">
+                <p>Category: {{p.category}}</p>
+            </div>
+            <div>
+                <button class="btn btn-primary" onclick="location.href='/buy/{{p.product_id}}'">Buy</button>
+                <button class="btn btn-primary" onclick="location.href='/add_to_cart/{{p.product_id}}'">Add to Cart</button>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}

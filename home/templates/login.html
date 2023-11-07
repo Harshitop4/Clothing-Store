@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+{% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        <p>{{message}}</p>
+    </div>
+{% endfor %}
+<div class="container my-5">
+    <div style="display: flex;align-items:center;justify-content:center;">
+      <h1>Login</h1>
+  </div>  
+    <form method='POST'>
+      {% csrf_token %}
+        <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Username</label>
+        <input name='name' type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-3">
+        <label  for="exampleInputPassword1" class="form-label">Password</label>
+        <input name='password' type="password" class="form-control" id="exampleInputPassword1" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<script>
+  var alertElements = document.querySelectorAll('.alert');
+  alertElements.forEach(function(alertElement, index) {
+      setTimeout(function() {
+          alertElement.style.display = 'none';
+      }, (index + 1) * 2000);
+  });
+</script>
+{% endblock content %}
